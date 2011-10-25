@@ -1,0 +1,5 @@
+24 Oct 2011 03:43:12,531 INFO  ~ Starting C:\play-1.2.3\Management
+24 Oct 2011 03:43:13,140 WARN  ~ You're running Play! in DEV mode
+24 Oct 2011 03:43:13,218 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+24 Oct 2011 03:43:51,968 INFO  ~ Connected to jdbc:h2:mem:play;MODE=MYSQL;LOCK_MODE=0
+24 Oct 2011 03:43:52,859 INFO  ~ Application 'Management' is now started !
