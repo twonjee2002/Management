@@ -1,75 +1,65 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
-        <div id="wrapper">
-			<div id="header">
-				<a href="#"><img src="public/images/logo.png" alt="Logo" id="logo" /></a>
-				<ul id="nav">
-					<li class="current_page_item"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Testimonials</a></li>
-					<li><a href="#">Login</a></li>
-				</ul>
-			</div>
-			<div id="masthead">
-				<p id="first-line">Futures. Now.</p>
-				<p id="second-line">Our Objective:</p>
-				<p id="third-line">Helping you to make Money</p>
-				<p id="fourth-line">Daily Comments / Daily Support and Resistance Levels<br/>Weekly Market Outlook / Custom Market Outlooks</p>
-				<a class="button" href="#">Learn more</a>
-			</div>
-			<div id="content">
-				<p id="about-us">Sign up with us and start experiencing the many benefits of investing. We're backed by years of experience making the right decisions for people. <a href="#">Read About Us &raquo;</a></p>
-				
-				<div class="column left">
-					<img src="public/images/pic1.jpg" alt="Pic" />
-					<h2>Feedback / Registration</h2>
-					<p>Tell us what you think about our web site, our recommendations, our people, or to sign up for access. . We welcome all of your comments and suggestions.</p>
-					<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatu</p>
-				</div>
-				
-				<div class="column middle">
-					<img src="public/images/pic2.jpg" alt="Pic" />
-					<h2>Owner's Registration</h2>
-					<p>Tell us what you think about our web site, our recommendations, our people, or to sign up for access. . We welcome all of your comments and suggestions.</p>
-					<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatu</p>
-				</div>
-				
-				<div class="column right">
-					<img src="public/images/pic3.jpg" alt="Pic" />
-					<h2>Helpful Links / Info</h2>
-					<p>Tell us what you think about our web site, our recommendations, our people, or to sign up for access. . We welcome all of your comments and suggestions.</p>
-					<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatu</p>
-				</div>
-				
-				<p id="contact-us">Contact Us Today for a consultation: 800-555-1212 or <a href="#">Email</a> host[at]corporateblue.net</p>
-			</div>
+<head>
+<title>#{get 'title' /}</title>
+<meta charset="${_response_encoding}">
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/main.css'}">
+#{get 'moreStyles' /}
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/favicon.png'}">
+<script src="@{'/public/javascripts/jquery-1.5.2.min.js'}"
+	type="text/javascript" charset="${_response_encoding}"></script>
+#{get 'moreScripts' /}
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<a href="#"><img src="public/images/logo.png" alt="Logo" id="logo" /> </a>
+			<ul id="nav">
+				<li class="current_page_item">#{a @Application.index()}Home#{/a}</li>
+				<li><a href="register">Register</a>
+				<li><a href="projects">Login</a>
+				</li>
+				#{if user }
+					<li>#{a @Projects.index()}Projects#{/a}</li>
+					<li><span>Welcome, ${user?.firstname} ! </span><li>
+					<li>#{a @Secure.logout()}Logout#{/a}</li>
+				#{/if}
+				#{else}
+					<li><a href="admin">AdminLogin</a></li>
+				#{/else}
+			</ul>
 		</div>
-		<div id="footer">
-			<div id="footer-wrap">
-				<p id="credit">Design by <a href="http://fearlessflyer.com">Fearless Flyer</a>.<br/>Coding by <a href="http://www.themelab.com">Theme Lab</a>.</p>
-				<img src="public/images/footer-logo.png" alt="Logo" />
-				<ul id="footer-nav">
-					<li class="first"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Company Blog</a></li>
-					<li><a href="#">Testimonials</a></li>
-					<li><a href="#">Login</a></li>
-				</ul>
-				<p id="copyright">2010 Copyright &copy; corporateblue.net All rights reserved</p>
-			
-			</div>
+		#{doLayout /}
+	</div>
+	<div id="footer">
+		<div id="footer-wrap">
+			<p id="credit">
+				Design by <a href="http://fearlessflyer.com">Fearless Flyer</a>.<br />Coding
+				by <a href="http://www.themelab.com">Theme Lab</a>.
+			</p>
+			<img src="public/images/footer-logo.png" alt="Logo" />
+			<ul id="footer-nav">
+				<li class="first">#{a @Application.index()}Home#{/a}
+				</li>
+				<li><a href="#">About</a>
+				</li>
+				#{if user }
+					<li>#{a @Projects.index()}Projects#{/a}</li>
+					<li> Welcome, ${user?.firstname} ! <li>
+					<li>#{a @Secure.logout()}Logout#{/a}</li>
+				#{/if}
+				#{else}
+					<li>#{a @Secure.login()}Login#{/a}</li>
+				#{/else}
+
+			</ul>
+			<p id="copyright">2010 Copyright &copy; corporateblue.net All
+				rights reserved</p>
+
 		</div>
-    </body>
+	</div>
+</body>
 </html>
