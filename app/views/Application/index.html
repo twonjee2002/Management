@@ -1,49 +1,30 @@
 #{extends 'main.html' /}
-#{set title:'Management' /}
+#{set title:'Home' /}
 
-<div id="masthead">
-				
-				
-			</div>
-			<h1>Search Projects</h1>
+<div id="login">
+    
+    (try with demo/demo)
 
-<p>
-    <input type="text" id="search" size="30">
-    <input type="submit" id="submit" value="Find Projects">
+    #{form @login(), id:'formLogin'}
+        <p class="field">
+            <label>Login Name:</label>
+            <input type="text" name="username" size="19" value="${flash.username}" />
+        </p>
+        <p class="field">
+            <label>Password:</label>
+            <input type="password" name="password" size="19"/>
+        </p>    
+        <p class="buttons">
+            <input type="submit" value="Account login" />
+        </p> 
+    #{/form}
 
-    <br>
+    <p>
+        <a href="@{register()}">Register New User</a>
+    </p>
 
-    Maximum results: 
-    <select id="size">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-    </select>
-</p>
-				
-			<div id="content">
-				<p id="about-us">Contact us and we will build your app for you.<a href="www.jethroltd.com">Read About Us &raquo;</a></p>
-				
-				<div class="column left">
-					<img src="public/images/pic1.jpg" alt="Pic" />
-					<h2>Feedback / Registration</h2>
-					<p>Tell us what you think about this application.</p>
-					<p>So ero re nipa agbekale yii</p>
-				</div>
-				
-				<div class="column middle">
-					<img src="public/images/pic2.jpg" alt="Pic" />
-					<h2>Owner's Registration</h2>
-					<p>Tell us what you think about this application.</p>
-					<p>So ero re nipa agbekale yii.</p>
-				</div>
-				
-				<div class="column right">
-					<img src="public/images/pic3.jpg" alt="Pic" />
-					<h2>Helpful Links / Info</h2>
-					<p>Tell us what you think about this application.</p>
-					<p>So ero re nipa agbekale yii.</p>				</div>
-				
-				<p id="contact-us">Contact Us Today for a consultation: +2348032072706 or <a href="mailto:twonjee2002@yahoo.com">Email</a> tunji@jethroltd.com</p>
-			</div>
-		</div>
+</div>
+
+<script type="text/javascript" charset="${_response_encoding}">
+    sessvars.$.clearMem()
+</script>

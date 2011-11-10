@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Book ' + hotel.name /}
+#{set title:'Record ' + project.name /}
 #{set 'moreScripts'}
     <script src="@{'/public/javascripts/jquery-ui-1.7.2.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{/set}
@@ -7,70 +7,70 @@
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/ui-lightness/jquery-ui-1.7.2.custom.css'}" />
 #{/set}
 
-<h1>Book hotel</h1>
+<h1>Edit project</h1>
 
-#{form @confirmBooking(hotel.id)}
+#{form @confirmRecording(project.id)}
     <p>
-        <strong>Name:</strong> ${hotel.name}
+        <strong>Name:</strong> ${project.name}
     </p>
     <p>
-        <strong>Address:</strong> ${hotel.address}
+        <strong>Address:</strong> ${project.address}
     </p>
     <p>
-        <strong>City:</strong> ${hotel.city}
+        <strong>City:</strong> ${project.city}
     </p>
     <p>
-        <strong>State:</strong> ${hotel.state}
+        <strong>State:</strong> ${project.state}
     </p>
     <p>
-        <strong>Zip:</strong> ${hotel.zip}
+        <strong>Zip:</strong> ${project.zip}
     </p>
     <p>
-        <strong>Country:</strong> ${hotel.country}
+        <strong>Country:</strong> ${project.country}
     </p>
     <p>
-        <strong>Nightly rate:</strong> ${hotel.price}
+        <strong>Daily Payment:</strong> ${project.price}
     </p>
-    #{field 'booking.checkinDate'}
+    #{field 'recording.checkinDate'}
         <p class="${field.errorClass}">
-            <strong>Check In Date:</strong> <input type="text" size="10" name="${field.name}" class="datepicker" value="${booking?.checkinDate?.format('yyyy-MM-dd')}"> *
+            <strong>Project Start date:</strong> <input type="text" size="10" name="${field.name}" class="datepicker" value="${recording?.checkinDate?.format('yyyy-MM-dd')}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}
-    #{field 'booking.checkoutDate'}
+    #{field 'recording.checkoutDate'}
         <p class="${field.errorClass}">
-            <strong>Check Out Date:</strong> <input type="text" size="10" name="${field.name}" class="datepicker" value="${booking?.checkoutDate?.format('yyyy-MM-dd')}"> *
+            <strong>Project end date:</strong> <input type="text" size="10" name="${field.name}" class="datepicker" value="${recording?.checkoutDate?.format('yyyy-MM-dd')}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}
     <p>
-        <strong>Room preference:</strong> 
-        #{select 'booking.beds', value:booking?.beds}
-            #{option 1}One king-size bed#{/option}
-            #{option 2}Two double beds#{/option}
-            #{option 3}Three beds#{/option}
+        <strong>Project description:</strong> 
+        #{select 'recording.beds', value:recording?.beds}
+            #{option 1}Upgrade#{/option}
+            #{option 2}Migration#{/option}
+            #{option 3}Others#{/option}
         #{/select}
     </p>
     <p>
-        <strong>Smoking preference:</strong> 
-        <input type="radio" name="booking.smoking" value="true" ${booking?.smoking ? 'checked' : ''}> Smoking
-        <input type="radio" name="booking.smoking" value="false" ${booking?.smoking ? '' : 'checked'}> Non smoking
+        <strong>Contract preferences:</strong> 
+        <input type="radio" name="recording.smoking" value="true" ${recording?.smoking ? 'checked' : ''}> Contract
+        <input type="radio" name="recording.smoking" value="false" ${recording?.smoking ? '' : 'checked'}> Non contract
     </p>
-    #{field 'booking.creditCard'}
+    #{field 'recording.creditCard'}
         <p class="${field.errorClass}">
-            <strong>Credit Card #:</strong> <input type="text" name="${field.name}" size="16" value="${booking?.creditCard}"> *
+            <strong>Project ref. number #:</strong> <input type="text" name="${field.name}" size="16" value="${recording?.creditCard}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}
-    #{field 'booking.creditCardName'}
+    #{field 'recording.creditCardName'}
         <p class="${field.errorClass}">
-            <strong>Credit Card Name:</strong> <input type="text" name="${field.name}" size="16" value="${booking?.creditCardName}"> *
+            <strong>Consultant Name:</strong> <input type="text" name="${field.name}" size="16" value="${recording?.creditCardName}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}
     <p>
-        <strong>Credit Card Expiry:</strong> 
-        #{select 'booking.creditCardExpiryMonth', value:booking?.creditCardExpiryMonth}
+        <strong>Next break:</strong> 
+        #{select 'recording.creditCardExpiryMonth', value:recording?.creditCardExpiryMonth}
             #{option 1}Jan#{/option}
             #{option 2}Feb#{/option}
             #{option 3}Mar#{/option}
@@ -84,16 +84,21 @@
             #{option 11}Nov#{/option}
             #{option 112}Dec#{/option}
         #{/select}
-        #{select 'booking.creditCardExpiryYear', value:booking?.creditCardExpiryYear}
+        #{select 'recording.creditCardExpiryYear', value:recording?.creditCardExpiryYear}
             #{option 2008}2008#{/option}
             #{option 2009}2009#{/option}
             #{option 2010}2010#{/option}
             #{option 2011}2011#{/option}
             #{option 2012}2012#{/option}
+            #{option 2013}2013#{/option}
+            #{option 2014}2014#{/option}
+            #{option 2015}2015#{/option}
+            #{option 2016}2016#{/option}
+            #{option 2017}2017#{/option}
         #{/select}      
     </p>    
     <p class="buttons">
-        <input type="submit" value="Proceed"> <a href="@{show(hotel.id)}">Cancel</a>    
+        <input type="submit" value="Proceed"> <a href="@{show(project.id)}">Cancel</a>    
     </p>
 #{/form}
 

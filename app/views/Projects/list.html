@@ -1,23 +1,23 @@
-#{if hotels}
+#{if projects}
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Address</th>
+                <th>Project Name</th>
+                <th>Company Address</th>
                 <th>City, State</th>
                 <th width="8%">Zip</th>
                 <th width="13%">Action</th>
             </tr>
         </thead>
         <tbody>
-            #{list hotels, as:'hotel'}
+            #{list projects, as:'project'}
                 <tr>
-                    <td>${hotel.name}</td>
-                    <td>${hotel.address}</td>
-                    <td>${hotel.city}, ${hotel.state}, ${hotel.country}</td>
-                    <td>${hotel.zip}</td>
+                    <td>${project.name}</td>
+                    <td>${project.address}</td>
+                    <td>${project.city}, ${project.state}, ${project.country}</td>
+                    <td>${project.zip}</td>
                     <td>
-                        <a href="@{show(hotel.id)}">View Hotel</a>
+                        <a href="@{show(project.id)}">View Project</a>
                     </td>
                 </tr>
             #{/list}

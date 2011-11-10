@@ -1,52 +1,38 @@
 package models;
 
-import play.*;
 import play.db.jpa.*;
- 
-import javax.persistence.*;
-import java.util.*;
- 
 import play.data.validation.*;
- 
+import javax.persistence.*;
+
 @Entity
+@Table(name="Recorder")
 public class User extends Model {
- 	
-    @Required
-    @MinSize(8)
-    public String firstname;
     
     @Required
-    @MinSize(8)
-    public String lastname;
-    
-    @Required
-    @MinSize(5)
-    @Password
-    public String password;
-	
-    @Required
-    @MinSize(8)
-    public String createdate;
-    
-    @Required
-    @MaxSize(5)
+    @MaxSize(15)
     @MinSize(4)
-    public String role;
+    @Match(value="^\\w*$", message="Not a valid username")
+    public String username;
     
     @Required
-    @MinSize(1)
-    public String active;
- 
-    @Required
-    @MaxSize(1000)
-    public String address;
-	
-    @Required
-    @Email
-    public String email;
+    @MaxSize(15)
+    @MinSize(5)
+    public String password;
     
-    public String toString() {
-        return email;
+    @Required
+    @MaxSize(100)
+    public String name;
+
+	public boolean isAdmin;
+   
+    public User(String name, String password, String username) {
+        this.name = name;
+        this.password = password;
+        this.username = username;
     }
-	
+
+    public String toString()  {
+        return "User(" + username + ")";
+    }
+    
 }

@@ -1,32 +1,32 @@
 #{extends 'main.html' /}
-#{set title:hotel.name /}
+#{set title:project.name /}
 
-<h1>View hotel</h1>
+<h1>View project</h1>
 
-#{form @book(hotel.id)}
+#{form @record(project.id)}
     <p>
-        <strong>Name:</strong> ${hotel.name}
+        <strong>Name:</strong> ${project.name}
     </p>
     <p>
-        <strong>Address:</strong> ${hotel.address}
+        <strong>Address:</strong> ${project.address}
     </p>
     <p>
-        <strong>City:</strong> ${hotel.city}
+        <strong>City:</strong> ${project.city}
     </p>
     <p>
-        <strong>State:</strong> ${hotel.state}
+        <strong>State:</strong> ${project.state}
     </p>
     <p>
-        <strong>Zip:</strong> ${hotel.zip}
+        <strong>Zip:</strong> ${project.zip}
     </p>
     <p>
-        <strong>Country:</strong> ${hotel.country}
+        <strong>Country:</strong> ${project.country}
     </p>
     <p>
-        <strong>Nightly rate:</strong> ${hotel.price}
+        <strong>Daily Payment:</strong> ${project.price}
     </p>
     
     <p class="buttons">
-        <input type="submit" value="Book Hotel"> <a href="@{index()}">Back to search</a>      
+        <input type="submit" value="Record Project"> <a href="@{index()}">Back to search</a>      
     </p>
 #{/form}

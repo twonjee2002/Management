@@ -1,14 +1,23 @@
 package controllers;
 
+import java.util.List;
+
 import play.*;
 import play.data.validation.Valid;
 import play.mvc.*;
 
 import models.*;
 
-@With(Secure.class)
+
 public class Application extends Controller {
 
+	 @Before
+	    static void addUser() {
+	        User user = connected();
+	        if(user != null) {
+	            renderArgs.put("user", user);
+	        }
+	    }
 	
     static User connected() {
         if(renderArgs.get("user") != null) {
@@ -20,18 +29,23 @@ public class Application extends Controller {
         } 
         return null;
     }
-    
+   
+    public static void show(Long id) {
+       Recording recording = Recording.findById(id);
+       render(recording);
+   
+    }
     // ~~
 
     public static void index() {
         if(connected() != null) {
-            Projects.index();
+            Application.index();
         }
         render();
     }
     
-    public static void register() {
-        render();
+      public static void register(String myName, String myPassword) {
+        render(myName, myPassword);
     }
     
     public static void saveUser(@Valid User user, String verifyPassword) {
@@ -41,16 +55,16 @@ public class Application extends Controller {
             render("@register", user, verifyPassword);
         }
         user.create();
-        session.put("user", user.email);
-        flash.success("Welcome, " + user.firstname);
+        session.put("user", user.username);
+        flash.success("Welcome, " + user.name);
         Projects.index();
     }
     
-    public static void login(String username, String password) {
+     public static void login(String username, String password) {
         User user = User.find("byUsernameAndPassword", username, password).first();
         if(user != null) {
-            session.put("user", user.email);
-            flash.success("Welcome, " + user.firstname);
+            session.put("user", user.username);
+            flash.success("Welcome, " + user.name);
             Projects.index();         
         }
         // Oops

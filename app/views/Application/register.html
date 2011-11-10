@@ -6,13 +6,13 @@
 #{form @saveUser()}
     #{field 'user.username'}
         <p class="${field.errorClass}">
-            <strong>Username:</strong> <input type="text" name="${field.firstname}" size="16" value="${user?.firstname}"> *
+            <strong>Username:</strong> <input type="text" name="${field.name}" size="16" value="${user?.username}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}
     #{field 'user.name'}
         <p class="${field.errorClass}">
-            <strong>Real name:</strong> <input type="text" name="${field.firstname}" size="16" value="${user?.firstname}"> *
+            <strong>Real name:</strong> <input type="text" name="${field.name}" size="16" value="${user?.name}"> *
             <span class="error">${field.error}</span>
         </p>
     #{/field}

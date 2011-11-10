@@ -1,54 +1,54 @@
 #{extends 'main.html' /}
-#{set title:'Confirm ' + hotel.name + ' booking' /}
+#{set title:'Confirm ' + project.name + ' recording' /}
 
-<h1>Confirm hotel booking</h1>
+<h1>Confirm project recording</h1>
 
 #{form @confirmRecording(project.id)}
     <p>
-        <strong>Name:</strong> ${project.projectname}
+        <strong>Name:</strong> ${project.name}
     </p>
     <p>
-        <strong>Address:</strong> ${project.companyaddress}
+        <strong>Address:</strong> ${project.address}
     </p>
     <p>
-        <strong>City:</strong> ${hotel.city}
+        <strong>City:</strong> ${project.city}
     </p>
     <p>
         <strong>State:</strong> ${project.state}
     </p>
     <p>
-        <strong>Zip:</strong> ${hotel.zip}
+        <strong>Zip:</strong> ${project.zip}
     </p>
     <p>
-        <strong>Country:</strong> ${hotel.country}
+        <strong>Country:</strong> ${project.country}
     </p>
     <p>
-        <strong>Nightly rate:</strong> ${hotel.price}
+        <strong>Daily Payment:</strong> ${project.price}
     </p>
     <p>
-        <strong>Beds:</strong> ${recording.beds}
-        <input type="hidden" name="booking.beds" value="${booking.beds}">
+        <strong>No. of consultants:</strong> ${recording.beds}
+        <input type="hidden" name="recording.beds" value="${recording.beds}">
     </p>
     <p>
         <strong>Total:</strong> ${recording.total.formatCurrency('USD')}
     </p>
     <p>
-        <strong>Check in date:</strong> ${recording.endDate.format('yyyy-MM-dd')}
-        <input type="hidden" name="booking.checkinDate" value="${recording.endDate.format('yyyy-MM-dd')}">
+        <strong>Project Start date:</strong> ${recording.checkinDate.format('yyyy-MM-dd')}
+        <input type="hidden" name="recording.checkinDate" value="${recording.checkinDate.format('yyyy-MM-dd')}">
     </p>
     <p>
-        <strong>Check out date:</strong> ${booking.checkoutDate.format('yyyy-MM-dd')}
-        <input type="hidden" name="booking.checkoutDate" value="${booking.checkoutDate.format('yyyy-MM-dd')}">
+        <strong>Project end date:</strong> ${recording.checkoutDate.format('yyyy-MM-dd')}
+        <input type="hidden" name="recording.checkoutDate" value="${recording.checkoutDate.format('yyyy-MM-dd')}">
     </p>
     <p>
-        <strong>Credit card #:</strong> ${booking.creditCard}
-        <input type="hidden" name="booking.creditCard" value="${booking.creditCard}">
-        <input type="hidden" name="booking.creditCardName" value="${booking.creditCardName}">
-        <input type="hidden" name="booking.creditCardExpiryMonth" value="${booking.creditCardExpiryMonth}">
-        <input type="hidden" name="booking.creditCardExpiryYear" value="${booking.creditCardExpiryYear}">
+        <strong>Project ref. number #:</strong> ${recording.creditCard}
+        <input type="hidden" name="recording.creditCard" value="${recording.creditCard}">
+        <input type="hidden" name="recording.creditCardName" value="${recording.creditCardName}">
+        <input type="hidden" name="recording.creditCardExpiryMonth" value="${recording.creditCardExpiryMonth}">
+        <input type="hidden" name="recording.creditCardExpiryYear" value="${recording.creditCardExpiryYear}">
     </p>
     
     <p class="buttons">
-        <input type="submit" value="Confirm" name="confirm"> <input type="submit" value="Revise" name="revise"> <a href="@{show(hotel.id)}">Cancel</a>    
+        <input type="submit" value="Confirm" name="confirm"> <input type="submit" value="Revise" name="revise"> <a href="@{show(project.id)}">Cancel</a>    
     </p>
 #{/form}

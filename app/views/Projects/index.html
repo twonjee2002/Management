@@ -1,35 +1,109 @@
-#{extends 'main.html' /} 
-#{set title:'Projects : Projects' /}
+#{extends 'main.html' /}
+#{set title:'Search' /}
 
-<div id="masthead">
+<h1>Search Projects</h1>
 
+<p>
+    <input type="text" id="search" size="30">
+    <input type="submit" id="submit" value="Find Projects">
+
+    <br>
+
+    Maximum results: 
+    <select id="size">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+</p>
+
+<div id="result">
 </div>
-<div id="content">
 
-	<table class="bordered">
-		<thead>
-			<th>Project Name</th>
-			<th>Date</th>
-			<th>Time</th>
-			<th>Last Updated Date</th>
-			<th>Last Updated Time</th>
-		</thead>
-		<tr>
-			<td>
-				Event
-			</td>
-			<td>
-				08.12.2011
-			</td>
-			<td>
-				12:05 AM
-			</td>
-			<td>
-				08.06.2011
-			</td>
-			<td>
-				3:45 PM
-			</td>
-		</tr>
-	</table>
-</div>
+<script type="text/javascript" charset="${_response_encoding}">
+
+    // Rebuild state
+    $('#search').val(sessvars.search)    
+    if(sessvars.page == undefined) {
+        sessvars.page = 1
+    }
+    if(sessvars.size == undefined) {
+        sessvars.size = 10
+    }
+    $('#size option[value='+sessvars.size+']').attr('selected', 'true')
+    
+    // Search function
+    var search = function() {
+        sessvars.search = $('#search').val()
+        sessvars.size = $('#size').val()
+        var listAction = #{jsAction @list(':search', ':size', ':page') /} 
+        $('#result').load(listAction({search: sessvars.search, size: sessvars.size, page: sessvars.page}), function() {
+            $('#content').css('visibility', 'visible')
+        })
+    }
+    
+    // Events handler
+    $('#submit').click(function() {
+        sessvars.page = 1
+        search()
+    })
+    $('#search').keyup(function() {
+        sessvars.page = 1
+        search()
+    })
+    $('#nextPage').live('click', function(e) {
+        sessvars.page = $(this).attr('href')
+        e.preventDefault()
+        search()        
+    })
+    
+    // Init
+    if(sessvars.search != undefined) {
+        $('#content').css('visibility', 'hidden')
+        search()
+    }
+    
+</script>
+
+<h1>Current Project Status</h1>
+
+#{ifnot recordings}
+    <p>
+        No Records Found
+    </p>
+#{/ifnot}
+#{else}
+   <table>
+       <thead>
+           <tr>
+               <th>Project Name</th>
+               <th>Company Address</th>
+               <th>City, State</th>
+               <th>Start in</th>
+               <th>End date</th>
+               <th>Project number</th>
+               <th>Remarks</th>
+               <th>Action</th>
+          </tr>
+       </thead>
+       <tbody>
+           #{list recordings, as:'recording'}
+               <tr>
+                   <td>${recording.project.name}</td>
+                   <td>${recording.project.address}</td>
+                   <td>${recording.project.city}, ${recording.project.state}, ${recording.project.country}</td>
+                   <td>${recording.checkinDate.format('yyyy-MM-dd')}</td>
+                   <td>${recording.checkoutDate.format('yyyy-MM-dd')}</td>
+                   <td>${recording.id}</td>
+                   <td>
+                        #{a @addRemarks(recording.id)}Remarks#{/a}
+                   </td>
+                   <td>
+                        #{a @cancelRecording(recording.id)}Cancel#{/a}
+                   </td>
+                   
+               </tr>
+           #{/list}
+       </tbody>
+   </table> 
+#{/else}
